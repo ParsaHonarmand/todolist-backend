@@ -71,7 +71,7 @@ app.get('/item', (req, res) => {
 app.get('/completedList', (req, res) => {
     console.log("get request from completedList")
     const collection = db.collection('todos')
-    const myDoc = collection.find({todo_check: true}).toArray(function(err, doc) {
+    const myDoc = collection.find({username:req.body.username,todo_check: true}).toArray(function(err, doc) {
         console.log(doc);
         res.send((doc))
     })
@@ -103,8 +103,10 @@ app.post('/createUser', (req, res) => {
 
 app.post('/getUser', (req,res) => {
     const collection = db.collection('todos')
-    collection.find({username: req.body.username})
-    const myDoc = collection.find({username:req.body.username, password: req.body.password}).toArray(function(err, doc) {
+    //collection.find({username: req.body.username, password: req.body.password})
+    const myDoc = collection.find({username:req.body.username, password: req.body.password})
+    
+    .toArray(function(err, doc) {
         console.log(doc);
         res.send((doc));
     })
