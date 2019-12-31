@@ -79,18 +79,18 @@ app.get('/completedList', (req, res) => {
 
 app.post('/complete', (req, res) => {
     const collection = db.collection('todos')
-    collection.updateOne({todo_name: req.body.todo_name}, {$set: {todo_check: true}})
+    collection.updateOne({username: req.body.username,todo_name: req.body.todo_name}, {$set: {todo_check: true}})
     console.log(req.body.todo_name)
 })
 
 app.post('/revert', (req, res) => {
     const collection = db.collection('todos')
-    collection.updateOne({todo_name: req.body.todo_name}, {$set: {todo_check: false}})
+    collection.updateOne({username: req.body.username,todo_name: req.body.todo_name}, {$set: {todo_check: false}})
 })
 
 app.post('/delete', (req, res) => {
     const collection = db.collection('todos')
-    collection.remove({todo_name: req.body.todo_name})
+    collection.remove({username: req.body.username, todo_name: req.body.todo_name})
     console.log(req.body.todo_name, " is now deleted")
 })
 
@@ -104,9 +104,7 @@ app.post('/createUser', (req, res) => {
 app.post('/getUser', (req,res) => {
     const collection = db.collection('todos')
     //collection.find({username: req.body.username, password: req.body.password})
-    const myDoc = collection.find({username:req.body.username, password: req.body.password})
-    
-    .toArray(function(err, doc) {
+    const myDoc = collection.find({username:req.body.username, password: req.body.password}).toArray(function(err, doc) {
         console.log(doc);
         res.send((doc));
     })
