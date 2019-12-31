@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.raw());
 
 
+console.log("*****")
 console.log(process.env.MONGODB_URI)
 MongoClient.connect(`${process.env.MONGODB_URI}todos` || 'mongodb://127.0.0.1:27017/todos', function(err, client) {
     assert.equal(null, err);
