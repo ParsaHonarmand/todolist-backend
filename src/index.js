@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 const assert = require('assert')
 const dbName = 'heroku_t9hst58j'
+// const dbName = 'todos'
 const todoRoutes = express.Router()
 let db
 
@@ -17,12 +18,14 @@ app.use(bodyParser.raw());
 // app_password123
 console.log("*****")
 console.log(process.env.MONGODB_URI)
+// `${process.env.MONGODB_URI}` ||
+// 'mongodb://127.0.0.1:27017/todos'
 MongoClient.connect(`${process.env.MONGODB_URI}` || 'mongodb://127.0.0.1:27017/todos', function(err, client) {
     console.log(err)
-
+  //  useUnifiedTopology: true
     assert.equal(null, err);
 
-    //useNewUrlParser: true 
+   // useNewUrlParser: true 
     console.log('Connected successfully to server')
     db = client.db(dbName)
   //  client.close();
