@@ -62,10 +62,12 @@ app.get('/item', (req, res) => {
     console.log("get request from item")
     const collection = db.collection('todos')
    // console.log(req.body)
-    const myDoc = collection.find({username:req.body.username}).toArray(function(err, doc) {
-         console.log(doc);
-         res.send((doc))
-     })
+    const myDoc = collection.find({username:req.body.username})
+    console.log(myDoc)
+    // .toArray(function(err, doc) {
+    //      console.log(doc);
+    //      res.send((doc))
+    //  })
 })
 
 app.get('/completedList', (req, res) => {
