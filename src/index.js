@@ -63,7 +63,7 @@ app.get('/item', (req, res) => {
     const collection = db.collection('todos')
    // console.log(req.body)
     var myDoc = collection.find({username:req.body.username})
-    console.log(myDoc)
+    console.log("YOOOOOO", myDoc)
     // .toArray(function(err, doc) {
     //      console.log(doc);
     //      res.send((doc))
