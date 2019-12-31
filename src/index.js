@@ -64,7 +64,7 @@ app.get('/item', (req, res) => {
    // console.log(req.body)
     var myDoc = collection.find({username:req.body.username},{todos:{todo_check: false}}).toArray(function(err, doc) {
          console.log(doc);
-         res.send((doc))
+         res.send((doc.data[0].todos[0]))
      })
 })
 
