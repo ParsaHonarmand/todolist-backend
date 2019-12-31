@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.raw());
 
 
-MongoClient.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/todos', function(err, client) {
+MongoClient.connect(`${process.env.MONGODB_URI}/todos` || 'mongodb://127.0.0.1:27017/todos', function(err, client) {
     assert.equal(null, err);
     //useNewUrlParser: true 
     console.log('Connected successfully to server')
