@@ -64,7 +64,7 @@ app.get('/item', (req, res) => {
    // console.log(req.body)
     var myDoc = collection.find({username:req.body.username,todos:{$elemMatch: {todo_check: false}}}).toArray(function(err, doc) {
          console.log(doc)
-         res.send((doc))
+         res.send(("HELLO"))
      })
 })
 
@@ -73,7 +73,7 @@ app.get('/completedList', (req, res) => {
     const collection = db.collection('todos')
     const myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
         console.log(doc);
-        res.send((doc))
+        res.send(([doc]))
     })
 })
 
