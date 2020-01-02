@@ -63,6 +63,7 @@ app.post('/retrieveItem', (req, res) => {
     const collection = db.collection('todos')
    // console.log(req.body)
    //,todos:{$elemMatch: {todo_check: false}}
+    console.log(req.body.username)
     var myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
          console.log(doc)
          res.send((doc))
