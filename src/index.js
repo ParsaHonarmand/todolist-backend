@@ -104,7 +104,7 @@ app.post('/createUser', (req, res) => {
 app.post('/getUser', (req,res) => {
     const collection = db.collection('todos')
     //collection.find({username: req.body.username, password: req.body.password})
-    const myDoc = collection.find({username:req.body.username, password: req.body.password}).toArray(function(err, doc) {
+    const myDoc = collection.find({username:req.body.username, password: req.body.password, todos:{}}).toArray(function(err, doc) {
         console.log(doc);
         res.send((doc));
     })
