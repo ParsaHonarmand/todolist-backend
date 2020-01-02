@@ -63,11 +63,10 @@ app.post('/retrieveItem', (req, res) => {
     const collection = db.collection('todos')
    // console.log(req.body)
    //,todos:{$elemMatch: {todo_check: false}}
-    res.send(req.body.username)
-    // var myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
-    //      console.log(doc)
-    //      res.send((doc))
-    //  })
+    var myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
+         console.log(doc)
+         res.send(doc)
+     })
 })
 
 app.post('/completedList', (req, res) => {
@@ -75,7 +74,7 @@ app.post('/completedList', (req, res) => {
     const collection = db.collection('todos')
     const myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
         console.log(doc);
-        res.send(([doc]))
+        res.send(doc)
     })
 })
 
