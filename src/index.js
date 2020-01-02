@@ -58,19 +58,19 @@ app.post('/item', (req, res) => {
         .catch(err => console.log(err))
 });
 
-app.get('/item', (req, res) => {
-    console.log("get request from item")
+app.post('/retrieveItem', (req, res) => {
+    console.log("get request from retrieveItem")
     const collection = db.collection('todos')
    // console.log(req.body)
    //,todos:{$elemMatch: {todo_check: false}}
-    var myDoc = collection.find({"username":req.body.username}).toArray(function(err, doc) {
+    var myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
          console.log(doc)
          res.send((doc))
      })
 })
 
-app.get('/completedList', (req, res) => {
-    console.log("get request from completedList")
+app.post('/completedList', (req, res) => {
+    console.log("post request to completedList")
     const collection = db.collection('todos')
     const myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
         console.log(doc);
@@ -105,7 +105,7 @@ app.post('/createUser', (req, res) => {
 app.post('/getUser', (req,res) => {
     const collection = db.collection('todos')
     //collection.find({username: req.body.username, password: req.body.password})
-    const myDoc = collection.find({username:req.body.username, password: req.body.password, todos:{}}).toArray(function(err, doc) {
+    const myDoc = collection.find({username:req.body.username, password: req.body.password}).toArray(function(err, doc) {
         console.log(doc);
         res.send((doc));
     })
