@@ -86,7 +86,7 @@ app.post('/completedList', (req, res) => {
 
 app.post('/complete', (req, res) => {
     const collection = db.collection('todos')
-    collection.updateOne({"username": req.body.username,"todos.todo_name": req.body.todo_name}, {$set: {todo_check: true}})
+    collection.updateOne({"username": req.body.username,"todos.todo_name": req.body.todo_name}, {$set: {"todos.$.todo_check": true}})
     console.log(req.body.todo_name)
     // collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
     //     .then(res => console.log("completed to-do", res.data))
