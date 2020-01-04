@@ -59,7 +59,7 @@ app.post('/item', (req, res) => {
     // collection.insertOne(req.body)
     //     .then(res => console.log(res.ops[0]))
     //     .catch(err => console.log(err))
-    collection.updateOne({"username": req.body.username}, {$push: {"todos": req.body}})
+    collection.updateOne({"username": req.body.username}, {$push: {"todos": req.body.todo}})
         .then(res => console.log("added to todolist", res.data))
         .catch(err => console.log(err))
 });
