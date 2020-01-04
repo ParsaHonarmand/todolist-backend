@@ -99,17 +99,17 @@ app.post('/revert', (req, res) => {
 
 app.post('/delete', (req, res) => {
     const collection = db.collection('todos')
-    collection.remove({username: req.body.username, todo_name: req.body.todo_name})
-    console.log(req.body.todo_name, " is now deleted")
+    // collection.remove({username: req.body.username, todo_name: req.body.todo_name})
+    // console.log(req.body.todo_name, " is now deleted")
+    collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
+        .then(res => console.log("deleted from todolist", res.data))
+        .catch(err => console.log(err))
 })
 
 app.post('/createUser', (req, res) => {
     const collection = db.collection('todos')
-    // collection.insertOne(req.body)
-    //     .then(res => console.log(res.ops[0]))
-    //     .catch(err => console.log(err))
-    collection.updateOne({"username": req.body.username}, {$set: {"todos": []}})
-        .then(res => console.log("added to todolist", res.data))
+    collection.insertOne(req.body)
+        .then(res => console.log(res.ops[0]))
         .catch(err => console.log(err))
 })
 
