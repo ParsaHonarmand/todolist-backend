@@ -34,14 +34,12 @@ MongoClient.connect(`${process.env.MONGODB_URI}` || 'mongodb://127.0.0.1:27017/t
   
 app.use('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PATCH,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
    });
 app.use('/item', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PATCH,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -99,8 +97,6 @@ app.post('/revert', (req, res) => {
 
 app.post('/delete', (req, res) => {
     const collection = db.collection('todos')
-    // collection.remove({username: req.body.username, todo_name: req.body.todo_name})
-    // console.log(req.body.todo_name, " is now deleted")
     collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
         .then(res => console.log("deleted from todolist", res.data))
         .catch(err => console.log(err))
