@@ -88,18 +88,13 @@ app.post('/complete', (req, res) => {
     const collection = db.collection('todos')
     collection.updateOne({"username": req.body.username,"todos.todo_name": req.body.todo_name}, {$set: {"todos.$.todo_check": true}})
     console.log(req.body.todo_name)
-    // collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
-    //     .then(res => console.log("completed to-do", res.data))
-    //     .catch(err => console.log(err))
 })
 
-// app.post('/revert', (req, res) => {
-//     const collection = db.collection('todos')
-//     //collection.updateOne({username: req.body.username,todo_name: req.body.todo_name}, {$set: {todo_check: false}})
-//     collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
-//         .then(res => console.log("deleted from todolist", res.data))
-//         .catch(err => console.log(err))
-// })
+app.post('/revert', (req, res) => {
+    const collection = db.collection('todos')
+    collection.updateOne({"username": req.body.username,"todos.todo_name": req.body.todo_name}, {$set: {"todos.$.todo_check": false}})
+    console.log(req.body.todo_name)
+})
 
 app.post('/delete', (req, res) => {
     const collection = db.collection('todos')
