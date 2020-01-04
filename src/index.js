@@ -86,11 +86,11 @@ app.post('/completedList', (req, res) => {
 
 app.post('/complete', (req, res) => {
     const collection = db.collection('todos')
-    // collection.updateOne({username: req.body.username,todo_name: req.body.todo_name}, {$set: {todo_check: true}})
-    // console.log(req.body.todo_name)
-    collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
-        .then(res => console.log("completed to-do", res.data))
-        .catch(err => console.log(err))
+    collection.updateOne({"username": req.body.username,"todos.todo_name": req.body.todo_name}, {$set: {todo_check: true}})
+    console.log(req.body.todo_name)
+    // collection.updateOne({"username": req.body.username}, {$set: {"todos": req.body.todos}})
+    //     .then(res => console.log("completed to-do", res.data))
+    //     .catch(err => console.log(err))
 })
 
 // app.post('/revert', (req, res) => {
