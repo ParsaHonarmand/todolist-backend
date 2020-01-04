@@ -105,8 +105,11 @@ app.post('/delete', (req, res) => {
 
 app.post('/createUser', (req, res) => {
     const collection = db.collection('todos')
-    collection.insertOne(req.body)
-        .then(res => console.log(res.ops[0]))
+    // collection.insertOne(req.body)
+    //     .then(res => console.log(res.ops[0]))
+    //     .catch(err => console.log(err))
+    collection.updateOne({"username": req.body.username}, {$set: {"todos": []}})
+        .then(res => console.log("added to todolist", res.data))
         .catch(err => console.log(err))
 })
 
