@@ -22,13 +22,9 @@ console.log(process.env.MONGODB_URI)
 // 'mongodb://127.0.0.1:27017/todos'
 MongoClient.connect(`${process.env.MONGODB_URI}` || 'mongodb://127.0.0.1:27017/todos', function(err, client) {
     console.log(err)
-  //  useUnifiedTopology: true
     assert.equal(null, err);
-
-   // useNewUrlParser: true 
     console.log('Connected successfully to server')
     db = client.db(dbName)
-  //  client.close();
 });
 
   
@@ -53,12 +49,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/item', (req, res) => {
-    //res.send(req.body)
     console.log(req.body)
     const collection = db.collection('todos')
-    // collection.insertOne(req.body)
-    //     .then(res => console.log(res.ops[0]))
-    //     .catch(err => console.log(err))
     collection.updateOne({"username": req.body.username}, {$push: {"todos": req.body.todo}})
         .then(res => console.log("added to todolist", res.data))
         .catch(err => console.log(err))
@@ -67,8 +59,6 @@ app.post('/item', (req, res) => {
 app.post('/retrieveItem', (req, res) => {
     console.log("get request from retrieveItem")
     const collection = db.collection('todos')
-   // console.log(req.body)
-   //,todos:{$elemMatch: {todo_check: false}}
     var myDoc = collection.find({username:req.body.username,todos:{todo_check: true}}).toArray(function(err, doc) {
          console.log(doc)
          res.send(doc)
@@ -126,11 +116,6 @@ app.post('/checkSignup', (req,res) => {
     })
 })
 
-
-// app.get('/getUser', (req, res) => {
-//     const collection = db.collection('todos')
-//     collection.find({username: req.body.username})
-// })
 
 app.use('/todos', todoRoutes);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
